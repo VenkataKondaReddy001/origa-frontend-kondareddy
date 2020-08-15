@@ -104,7 +104,7 @@
           <mat-cell [attr.title]="element.company.name" *matCellDef="let element"> {{element.company.name}} </mat-cell>
         </ng-container>
 
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
         <mat-row (click)="getUser(row)" [class.highlighted]="row?.id === selUser?.id" *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
     </mat-card>

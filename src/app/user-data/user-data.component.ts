@@ -45,7 +45,10 @@ export class UserDataComponent implements OnInit {
       (
         (response) => {
           if (response != null) {
+            //assigning table data
             this.dataSource = response;
+
+            //assigning pie chart data
             var LanGreater = _.filter(this.dataSource, function (o) {
               if (o.address != null && o.address.geo != null)
                 if (parseFloat(o.address.geo.lat) > 0) return o
@@ -64,6 +67,7 @@ export class UserDataComponent implements OnInit {
             }).length;
             this.pieChartData = [LanGreater, LanLessthan, LngGreater, LngLessthan]
               
+            //assigning percentage box data
             this.perc = _.uniq(_.map(this.dataSource, 'id')).length
 
 

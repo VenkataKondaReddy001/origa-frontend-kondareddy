@@ -253,3 +253,19 @@ mat-row.highlighted {
 mat-row.highlighted mat-cell {
     background: #f7f7f7;
 }
+
+mat-toolbar {
+    justify-content: space-between;
+}
+
+.content {
+    padding: 16px;
+}
+
+.content.pd-r0 {
+    padding-right: 0px;
+}
+
+.content > mat-card {
+    margin: 16px 0px 16px 0px;
+}

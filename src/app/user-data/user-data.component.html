@@ -1,0 +1,112 @@
+<div class="full_div">
+  <div class="hor_half_t">
+    <div class="full_div o-auto">
+      <div class="ver_half" >
+        <mat-card class="mat_card">
+          <mat-card-header>
+            <mat-card-title>Pie Chart</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="flex-row h-100">
+              <canvas baseChart [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
+                [options]="lineChartOptions" [colors]="chartColors">
+              </canvas>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="ver_half">
+        <div class="hor_half">
+          <mat-card class="mat_card">
+            <mat-card-header>
+              <mat-card-title class="text-oneline">Percentage of Users</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <h6 class="mb4 text-oneline">No of Users Fetched out of 100</h6>
+              <div class="class_pc1 row d-flex align-items-center">
+                <div class="col-9">
+                  <h3 class="f-w-300 d-flex align-items-center m-b-0 text-oneline">
+                    <mat-icon class="text-c-green f-30 m-r-10">arrow_upward</mat-icon>{{perc}} / 100
+                  </h3>
+                </div>
+                <div class="col-3 text-right">
+                  <p class="m-b-0 text-oneline">{{(perc/100)*100}} %</p>
+                </div>
+              </div>
+              <div class="progress m-t-16" style="height: 7px;">
+                <div class="progress-bar progress-c-theme" role="progressbar" [style.width]="(perc/100)*100 + '%'"
+                  aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div class="hor_half">
+          <mat-card class="mat_card">
+            <mat-card-header>
+              <mat-card-title>User Info</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <div class="flex-row h-100">
+
+                <div class="fr_div">
+                  <span class="span_icon">
+                    <mat-icon>person_outline</mat-icon><b>Name</b>
+                  </span>
+                  <span [attr.title]="selUser?.name" class="span_text"><b>: </b>{{selUser?.name}}</span>
+                </div>
+                <div class="fr_div">
+                  <span class="span_icon">
+                    <mat-icon>person</mat-icon><b>Username</b>
+                  </span>
+                  <span [attr.title]="selUser?.username" class="span_text"><b>: </b>{{selUser?.username}}</span>
+                </div>
+                <div class="fr_div">
+                  <span class="span_icon">
+                    <mat-icon>email</mat-icon><b>Email</b>
+                  </span>
+                  <span [attr.title]="selUser?.email" class="span_text"><b>: </b>{{selUser?.email}}</span>
+                </div>
+
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hor_half_b">
+
+    <mat-card class="mat_card  o-auto">
+      <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="Name">
+          <mat-header-cell *matHeaderCellDef> name </mat-header-cell>
+          <mat-cell [attr.title]="element.name" *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Username">
+          <mat-header-cell *matHeaderCellDef> User Name </mat-header-cell>
+          <mat-cell [attr.title] ="element.username" *matCellDef="let element"> {{element.username}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="City">
+          <mat-header-cell *matHeaderCellDef> City </mat-header-cell>
+          <mat-cell [attr.title]="element.address.city" *matCellDef="let element"> {{element.address.city}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Pincode">
+          <mat-header-cell *matHeaderCellDef> Pin Code </mat-header-cell>
+          <mat-cell [attr.title]="element.address.zipcode" *matCellDef="let element"> {{element.address.zipcode}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Company Name">
+          <mat-header-cell *matHeaderCellDef> Name of the Company </mat-header-cell>
+          <mat-cell [attr.title]="element.company.name" *matCellDef="let element"> {{element.company.name}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row (click)="getUser(row)" [class.highlighted]="row?.id === selUser?.id" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </mat-card>
+  </div>
+</div>
